@@ -74,14 +74,11 @@ Evaluation uses **per-label thresholding** (each genre gets its own decision thr
 | Configuration | Text | Image | Micro-F1 |
 |---|---|---|---|
 | **Late Fusion (weighted)** | **DistilBERT** | **ConvNeXt-Tiny** | **0.6463** |
-| Late Fusion (average) | DistilBERT | ConvNeXt-Tiny | _TODO_ |
-| Early Fusion | DistilBERT | ConvNeXt-Tiny | _TODO_ |
-| Gated Fusion | DistilBERT | ConvNeXt-Tiny | _TODO_ |
-| Text only | DistilBERT | — | _TODO_ |
-| Image only | — | ConvNeXt-Tiny | _TODO_ |
-
-<!-- TODO: fill remaining cells from MAIN_TABLE_permodelPL_clean_alpha0.35.csv -->
-<!-- TODO: optionally add per-label F1 breakdown or a figure -->
+| Late Fusion (average) | DistilBERT | ConvNeXt-Tiny | 0.6189 |
+| Early Fusion | DistilBERT | ConvNeXt-Tiny | 0.6087 |
+| Gated Fusion | DistilBERT | ConvNeXt-Tiny | 0.5453 |
+| Text only | DistilBERT | — | 0.5976 |
+| Image only | — | ConvNeXt-Tiny | 0.5326 |
 
 ---
 
@@ -111,7 +108,7 @@ Reproduction is organized in layers, from "runs anywhere" to "reference only," s
 pip install -r requirements.txt
 
 # 2. Reproduce the headline metrics from saved probabilities + thresholds
-python src/evaluate/reproduce_results.py   # TODO: confirm final script name
+python src/evaluate/reproduce_results.py  
 ```
 
 Environment (pinned in `requirements.txt`):
@@ -127,22 +124,22 @@ Environment (pinned in `requirements.txt`):
 
 ```
 multimodal-genre-fusion/
-├── README.md              # this file
+├── README.md
 ├── requirements.txt
-├── LICENSE                # TODO: choose a license
-├── .gitignore
 │
-├── notebooks/             # Colab notebooks (exploration & training, cleaned)
-├── src/                   # core logic as .py (collection + evaluation)
-│   └── evaluate/          # ★ evaluation-reproduction code
-├── results/               # ★ reproduction artifacts
-│   ├── probs/             # saved prediction probabilities (.npy)
-│   ├── thresholds/        # per-label thresholds
-│   └── main_table.csv     # final comparison results
-├── data/
-│   ├── README.md          # how to rebuild the dataset
-│   └── movie_ids.csv      # TMDb movie IDs (no poster images)
-└── figures/               # architecture diagrams
+├── src/
+│   └── evaluate/
+│       └── reproduce_results.py    # reproduce headline Micro-F1 (no GPU)
+│
+└── results/                        # ★ reproduction artifacts
+    ├── probs/                      # saved prediction probabilities (.npy)
+    │   ├── text_distilbert_test_prob.npy
+    │   ├── image_convnext_test_prob.npy
+    │   └── lf_weighted_test_prob.npy
+    ├── thresholds/
+    │   └── lf_weighted_perlabel_thresholds.npy
+    ├── y_test.npy
+    └── label_order.npy
 ```
 
 ---

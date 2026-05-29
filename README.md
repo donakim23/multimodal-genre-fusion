@@ -165,5 +165,5 @@ multimodal-genre-fusion/
 
 ## Author
 
-**Kim Doyun (金祹昀)** — M.S., Graduate School of AI・SW, Sogang University
+**Kim Doyun (金祹昀/キム・ドユン)** — M.S., Graduate School of AI・SW, Sogang University
 <!-- TODO: add contact / LinkedIn / portfolio links as desired -->
